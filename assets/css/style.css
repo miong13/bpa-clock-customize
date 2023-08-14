@@ -1,0 +1,7 @@
+ul.clock-layout-selection li{
+    list-style: none;
+}
+
+ul.clock-layout-selection li:hover{
+    cursor: pointer;
+}
