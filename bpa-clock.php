@@ -16,10 +16,11 @@
  */
 
 
-function remove_image_zoom_support_webtalkhub() {
+function remove_image_zoom_support_bpasite() {
     remove_theme_support( 'wc-product-gallery-zoom' );
+    // remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20 );
 }
-add_action( 'wp', 'remove_image_zoom_support_webtalkhub', 100 );
+add_action( 'wp', 'remove_image_zoom_support_bpasite', 100 );
 
 if(!function_exists("bpa_clock_customizer_func")){
 
@@ -40,13 +41,17 @@ if(!function_exists("bpa_clock_customizer_func")){
         ), $atts );
 
 
+        $asset_image = plugins_url( 'assets/images', __FILE__ );
+
         wp_enqueue_script(
-            'atfwoofilter-js', 
+            'bpa-clock-customizer', 
             plugins_url( 'assets/js/frontend.js', __FILE__ ),
             array( 'jquery' ),
             '0.0.1.r-'.date('YmdHiS'),
             true
         );  
+
+        wp_localize_script( 'bpa-clock-customizer', 'bpaJS', array( 'asset_image_url' => $asset_image));
 
         wp_enqueue_style( 'bpa-clock-customizer', plugins_url( 'assets/css/style.css', __FILE__ ), false, '0.0.1.r-'.date('YmdHis'), 'all' );
 
@@ -56,9 +61,9 @@ if(!function_exists("bpa_clock_customizer_func")){
                 <strong>Select Template :</strong>
                 <div class="">
                     <ul class="clock-layout-selection">
-                        <li data-id="hellokitty-layout">Hello Kitty Layout</li>
-                        <li data-id="lady-layout">Lady Layout</li>
-                        <li data-id="quran-layout">Quran Layout</li>
+                        <li data-id="hello-kitty" class="active">Hello Kitty Layout</li>
+                        <li data-id="lady">Lady Layout</li>
+                        <li data-id="quran">Quran Layout</li>
                     </ul>
                 </div>
             </div>
@@ -68,9 +73,14 @@ if(!function_exists("bpa_clock_customizer_func")){
     
     add_shortcode( 'bpa-clock-customizer', 'bpa_clock_customizer_func' );
 
-    function bpa_show_new_product_image(){
-        echo 'NEW IMAGE HERE!';
-    }
+
 }
 
+// function bpa_show_new_product_image(){
+//     echo '<div class="woocommerce-product-gallery__wrapper">';
+//     echo '<img src="'.plugins_url( 'assets/images/hello-kitty-outline.jpg', __FILE__ ).'">';
+//     echo '</div>';
+// } 
+
+// add_action('woocommerce_before_single_product_summary', 'bpa_show_new_product_image', 20);
 

@@ -5,3 +5,8 @@ ul.clock-layout-selection li{
 ul.clock-layout-selection li:hover{
     cursor: pointer;
 }
+
+ul.clock-layout-selection li.active {
+    font-weight: bold;
+}
+
